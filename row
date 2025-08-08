@@ -1,84 +1,96 @@
 loadstring(game:HttpGet("https://pastefy.app/RJINtroL/raw"))()
--- Roblox GUI version of the loading screen
+-- Roblox GUI Version of the Loading Screen
 
--- Create ScreenGui
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "GardenLoadingScreen"
-screenGui.ResetOnSpawn = false
-screenGui.IgnoreGuiInset = true
-screenGui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local LoadingBarBack = Instance.new("Frame")
+local LoadingBar = Instance.new("Frame")
+local LoadingText = Instance.new("TextLabel")
+local MiniGamesButton = Instance.new("TextButton")
+local SelfDestroyButton = Instance.new("TextButton")
 
--- Create background frame
-local bg = Instance.new("Frame")
-bg.Size = UDim2.new(1, 0, 1, 0)
-bg.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
-bg.BorderSizePixel = 0
-bg.Parent = screenGui
+ScreenGui.Name = "PoolLoadingGUI"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
 
--- Add gradient background
-local gradient = Instance.new("UIGradient")
-gradient.Color = ColorSequence.new {
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(200, 200, 200)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 255, 255)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(17, 17, 17))
-}
-gradient.Rotation = 45
-gradient.Parent = bg
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.25, 0, 0.3, 0)
+MainFrame.Size = UDim2.new(0.5, 0, 0.3, 0)
+MainFrame.BackgroundTransparency = 0.2
 
--- Create title
-local title = Instance.new("TextLabel")
-title.Size = UDim2.new(1, 0, 0, 100)
-title.Position = UDim2.new(0, 0, 0.3, -100)
-title.BackgroundTransparency = 1
-title.Text = "🌴 Grow a Garden 🌴"
-title.TextColor3 = Color3.new(1, 1, 1)
-title.Font = Enum.Font.SourceSansBold
-title.TextScaled = true
-title.TextStrokeTransparency = 0.5
-title.Parent = bg
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1
+Title.Position = UDim2.new(0, 0, 0, -50)
+Title.Size = UDim2.new(1, 0, 0, 50)
+Title.Font = Enum.Font.SourceSansBold
+Title.Text = "🌴 Grow a Garden 🌴"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextScaled = true
 
--- Create loading bar container
-local barContainer = Instance.new("Frame")
-barContainer.Size = UDim2.new(0.8, 0, 0, 40)
-barContainer.Position = UDim2.new(0.1, 0, 0.5, 0)
-barContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-barContainer.BackgroundTransparency = 0.8
-barContainer.BorderSizePixel = 2
-barContainer.Parent = bg
+LoadingBarBack.Name = "LoadingBarBack"
+LoadingBarBack.Parent = MainFrame
+LoadingBarBack.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+LoadingBarBack.Position = UDim2.new(0.05, 0, 0.5, -10)
+LoadingBarBack.Size = UDim2.new(0.9, 0, 0, 20)
+LoadingBarBack.BorderSizePixel = 0
 
--- Round corners
-local uic = Instance.new("UICorner")
-uic.CornerRadius = UDim.new(0, 20)
-uic.Parent = barContainer
+LoadingBar.Name = "LoadingBar"
+LoadingBar.Parent = LoadingBarBack
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+LoadingBar.Size = UDim2.new(0, 0, 1, 0)
+LoadingBar.BorderSizePixel = 0
 
--- Create loading bar fill
-local barFill = Instance.new("Frame")
-barFill.Size = UDim2.new(0, 0, 1, 0)
-barFill.BackgroundColor3 = Color3.new(1, 1, 1)
-barFill.Parent = barContainer
+LoadingText.Name = "LoadingText"
+LoadingText.Parent = MainFrame
+LoadingText.BackgroundTransparency = 1
+LoadingText.Position = UDim2.new(0, 0, 0.7, 0)
+LoadingText.Size = UDim2.new(1, 0, 0, 30)
+LoadingText.Font = Enum.Font.SourceSansBold
+LoadingText.Text = "0% - discord.gg/darkscripts"
+LoadingText.TextColor3 = Color3.fromRGB(255, 255, 255)
+LoadingText.TextScaled = true
 
-local uicFill = Instance.new("UICorner")
-uicFill.CornerRadius = UDim.new(0, 20)
-uicFill.Parent = barFill
+MiniGamesButton.Name = "MiniGamesButton"
+MiniGamesButton.Parent = MainFrame
+MiniGamesButton.Position = UDim2.new(0, -110, 0, 0)
+MiniGamesButton.Size = UDim2.new(0, 100, 0, 30)
+MiniGamesButton.Text = "Mini Games"
+MiniGamesButton.Font = Enum.Font.SourceSans
+MiniGamesButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MiniGamesButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+MiniGamesButton.MouseButton1Click:Connect(function()
+    warn("Mini games coming soon!")
+end)
 
--- Create label inside bar
-local label = Instance.new("TextLabel")
-label.Size = UDim2.new(1, 0, 1, 0)
-label.BackgroundTransparency = 1
-label.Text = "discord.gg/darkscripts"
-label.TextColor3 = Color3.new(0, 0, 0)
-label.Font = Enum.Font.SourceSansBold
-label.TextScaled = true
-label.Parent = barFill
+SelfDestroyButton.Name = "SelfDestroyButton"
+SelfDestroyButton.Parent = MainFrame
+SelfDestroyButton.Position = UDim2.new(0, -110, 0, 40)
+SelfDestroyButton.Size = UDim2.new(0, 100, 0, 30)
+SelfDestroyButton.Text = "Self Destroy"
+SelfDestroyButton.Font = Enum.Font.SourceSans
+SelfDestroyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+SelfDestroyButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+SelfDestroyButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
 
--- Animate loading over 10 seconds
-local TweenService = game:GetService("TweenService")
-local tween = TweenService:Create(barFill, TweenInfo.new(10, Enum.EasingStyle.Linear), {
-    Size = UDim2.new(1, 0, 1, 0)
-})
-tween:Play()
+-- Loading logic
+local duration = 100 -- in seconds
+local progress = 0
+local steps = 100
+local waitTime = duration / steps
 
--- Optional: remove GUI after loading
--- tween.Completed:Connect(function()
---     screenGui:Destroy()
--- end)
+spawn(function()
+    for i = 1, steps do
+        progress = i
+        LoadingBar.Size = UDim2.new(progress/100, 0, 1, 0)
+        LoadingText.Text = progress .. "% - discord.gg/darkscripts"
+        wait(waitTime)
+    end
+end)
